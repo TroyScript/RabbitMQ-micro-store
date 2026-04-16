@@ -1,6 +1,6 @@
 package com.example.order_service.service;
 
-import com.example.order_service.model.OrderRequest;
+import com.example.order_service.dto.OrderRequestDTO;
 import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,7 +17,7 @@ public class OrdersService {
     @Value("${rabbitmq.routing.key}")
     private String orderPlacedRoutingKey;
 
-    public void sendOrder(OrderRequest order){
+    public void sendOrder(OrderRequestDTO order){
         rabbitTemplate.convertAndSend(orderExchangeName, orderPlacedRoutingKey, order);
     }
 }
