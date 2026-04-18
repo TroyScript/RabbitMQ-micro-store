@@ -17,8 +17,8 @@ public class OrdersController {
     private final OrdersService ordersService;
 
     @PostMapping("/post")
-    public ResponseEntity<OrderRequestDTO> post(@RequestBody @Valid OrderRequestDTO order){
+    public ResponseEntity<String> post(@RequestBody @Valid OrderRequestDTO order){
         ordersService.sendOrder(order);
-        return ResponseEntity.ok(order);
+        return ResponseEntity.ok().body("Order registered successfully.");
     }
 }
