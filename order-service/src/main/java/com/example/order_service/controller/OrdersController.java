@@ -1,6 +1,7 @@
 package com.example.order_service.controller;
 
 import com.example.order_service.dto.OrderRequestDTO;
+import com.example.order_service.dto.OrderResponseDTO;
 import com.example.order_service.service.OrdersService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,8 +18,8 @@ public class OrdersController {
     private final OrdersService ordersService;
 
     @PostMapping("/post")
-    public ResponseEntity<String> post(@RequestBody @Valid OrderRequestDTO order){
-        ordersService.sendOrder(order);
-        return ResponseEntity.ok().body("Order registered successfully.");
+    public ResponseEntity<OrderResponseDTO> post(@RequestBody @Valid OrderRequestDTO order){
+        OrderResponseDTO response = ordersService.sendOrder(order);
+        return ResponseEntity.accepted().body(response);
     }
 }
